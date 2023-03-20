@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: blue;
+    padding: 1rem;
+                
+}
+h1{
+    /* font-size: calc(6.25px + 0.1rem + 2vw); */
+    font-size: clamp(15px, 3vw ,40px);
+/* minimun-value, PREFERED VALUE (DYNAMIC), maximum-value */
+}
+.cards{
+    padding-inline: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card{
+    aspect-ratio: 10/ 2;
+    flex-basis: 250px;
+    max-width: 100%;
+    flex-grow: 1;
+    background-color: red;
+}
+.card img{
+    width: 100%;
+    aspect-ratio: 5 / 1;
+}
+
+@media screen and (min-width: 846px) {
+    .card {
+    flex-basis: 48%;
+    }
+}
+@media screen and (min-width: 1350px) {
+    .card {
+      flex-basis: 24%;
+    }
+}
