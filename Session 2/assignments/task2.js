@@ -11,3 +11,12 @@
 // ⦁ Otherwise, after the check, the remaining salary is printed on the console (to be displayed as an integer).
 // BONUS
 // Add sites that will increase the worker's salary.
+///////////////////////////////////////////////////////
+// let salary = 1000;
+// const facebookPenalty = 150;
+// const instagramPenalty = 100;
+// const redditPenalty = 50;
+// const openedTabs = [`Facebook`, `Instagram`, `Reddit`, `Github`]
+// Result ==== 700
+// const openedTabs = [`Facebook`, `Instagram`, `Reddit`, `Github`, `Facebook`, `Facebook`, `Facebook`, `Facebook`, `Facebook`]
+// Result ==== You have lost your salary.
