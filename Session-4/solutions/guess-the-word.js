@@ -26,7 +26,7 @@ function playGame(words) {
     const shuffledWordArray = [];
     function shuffeldWordfn() {
 
-        /////////////////////////////// This solution is not working if you have word with mulplite same letters.
+        /////////////////////////////// This solution is not working if you have word with multiple same letters.
         // do {
         //     const randomNumber = Math.floor(Math.random() * letters.length);
         //     const randomLetter = letters[randomNumber];
@@ -51,26 +51,29 @@ function playGame(words) {
         while (shuffledWordArray.join('') == randomWord)
         return shuffledWordArray;
     }
-    let atempts = 3;
+    let attempt = 3;
+    let isWon = false
     const shuffledWord = shuffeldWordfn();
     console.log(`Shuffled word: ${shuffledWord.join('')}`);
     do {
         const inputByPlayer = readlineSync.question('Guess the Random Word: ');
-        atempts--;
+        attempt--;
         if (inputByPlayer === randomWord) {
             console.log(`You won`)
-            atempts = 0;
+            isWon = true;
+            attempt = 0;
+
         }
         else {
-            console.log(`You guess is incorect and you have ${atempts} atempts left`);
+            console.log(`You guess is incorect and you have ${attempt} attemp${attempt === 1 || 0 ? `t` : `s`} left`);
         }
-        if (atempts === 2) {
+        if (attempt === 2) {
             console.log(`Hint: the first letter of the word you need to guess is ${randomWord[0]}`);
         }
 
-    } while (atempts !== 0);
+    } while (attempt !== 0);
 
-    console.log(`The correct word was ${randomWord}`);
+    if (!isWon) console.log(`The correct word was ${randomWord}`);
     const playAgain = readlineSync.question('Do you want to play again? ').toLowerCase();
     if (playAgain === 'y' || playAgain === 'yes') {
         playGame(words);
