@@ -18,13 +18,13 @@
 // 8. At the end of the game, you will have the option to play again with a new random word.
 
 const readlineSync = require('readline-sync');
-const words = ['cat', 'dog', 'elephent', 'giraffe', 'bird', 'fish', 'tiger', 'snake']
+const words = ['cat', 'dog', 'elephant', 'giraffe', 'bird', 'fish', 'tiger', 'snake']
 
 function playGame(words) {
     const randomWord = words[Math.floor(Math.random() * words.length)];
     const letters = randomWord.split('');
     const shuffledWordArray = [];
-    function shuffeldWordfn() {
+    function shuffeWord() {
 
         /////////////////////////////// This solution is not working if you have word with multiple same letters.
         // do {
@@ -53,7 +53,7 @@ function playGame(words) {
     }
     let attempt = 3;
     let isWon = false
-    const shuffledWord = shuffeldWordfn();
+    const shuffledWord = shuffeWord();
     console.log(`Shuffled word: ${shuffledWord.join('')}`);
     do {
         const inputByPlayer = readlineSync.question('Guess the Random Word: ');
@@ -74,6 +74,7 @@ function playGame(words) {
     } while (attempt !== 0);
 
     if (!isWon) console.log(`The correct word was ${randomWord}`);
+
     const playAgain = readlineSync.question('Do you want to play again? ').toLowerCase();
     if (playAgain === 'y' || playAgain === 'yes') {
         playGame(words);
