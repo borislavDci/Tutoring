@@ -1,65 +1,113 @@
-const readlineSync = require('readline-sync');
-
+const readlineSync = require("readline-sync");
+class Player {
+    constructor(name) {
+        this.name = name;
+        this.score = 0;
+        this.totalScore = 0;
+    }
+}
 function computerPlay() {
-    const moves = ['rock', 'paper', 'scissors']
-    const picker = moves[Math.floor(Math.random() * moves.length)]
+    const moves = ["rock", "paper", "scissors"];
+    const picker = moves[Math.floor(Math.random() * moves.length)];
     return picker;
 }
 
 function playRound(playerMove, computerMove) {
-
     const playerMoveToLowerCase = playerMove.toLowerCase();
 
     if (playerMoveToLowerCase === computerMove) {
-        return `It's a tie!`
+        return `It's a tie! The round be replayed!`;
     } else if (
-        (playerMoveToLowerCase === 'rock' && computerMove === 'scissors') ||
-        (playerMoveToLowerCase === 'paper' && computerMove === 'rock') ||
-        (playerMoveToLowerCase === 'scissors' && computerMove === 'paper')) {
-        return `You win ${playerMoveToLowerCase} beats ${computerMove}`
+        (playerMoveToLowerCase === "rock" && computerMove === "scissors") ||
+        (playerMoveToLowerCase === "paper" && computerMove === "rock") ||
+        (playerMoveToLowerCase === "scissors" && computerMove === "paper")
+    ) {
+        return `You win ${playerMoveToLowerCase} beats ${computerMove}`;
+    } else {
+        return `You lose! ${computerMove} beats ${playerMoveToLowerCase}`;
     }
-    else {
-        return `You lose! ${computerMove} beats ${playerMoveToLowerCase}`
+}
+function setup() {
+    const players = [];
+    for (let i = 0; i < 2; i++) {
+        const playerName = readlineSync.question(`Player ${i + 1} name: `);
+        players[i] = new Player(playerName);
     }
-
+    game(players);
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let rounds = readlineSync.question(`Hello, this is rock, paper and scissors game!   
-    How many rounds do you want to play?
-     `)
+function game(players) {
+    const playerOne = players[0];
+    const playerTwo = players[1];
+    let rounds = readlineSync.question(`How many rounds do you want to play?
+`);
     while (rounds % 2 === 0) {
-        rounds = readlineSync.question(`Please pick an odd number! `)
+        rounds = readlineSync.question(`Please pick an odd number! `);
     }
 
     const halfRounds = rounds / 2;
     for (let i = 1; i <= rounds; i++) {
-        const playerSelection = readlineSync.question(`Round ${i}: Choose rock, paper, or scissors `)
+        const playerSelection = readlineSync.question(
+            `Round ${i}: Choose rock, paper, or scissors `
+        );
         const computerSelection = computerPlay();
 
-        const result = playRound(playerSelection, computerSelection)
+        const result = playRound(playerSelection, computerSelection);
         console.log(result);
 
         if (result.includes(`win`)) {
-            playerScore++
+            playerOne.score++;
         } else if (result.includes(`lose`)) {
-            computerScore++
+            playerTwo.score++;
         } else if (result.includes(`tie`)) {
             i--;
         }
-        if (playerScore > halfRounds || computerScore > halfRounds) {
-            if (playerScore > computerScore) {
-                console.log(`Contrags! You win, Your score is: ${playerScore} Computer score is: ${computerScore}`);
+        if (playerOne.score > halfRounds || playerTwo.score > halfRounds) {
+            if (playerOne.score > playerTwo.score) {
+                console.log(
+                    `Contrags! You win, ${playerOne.name} score is: ${playerOne.score} ${playerTwo.name} score is: ${playerTwo.score}`
+                );
+                playerOne.totalScore++;
+                playerOne.score = 0;
+                playerTwo.score = 0;
+                console.log(
+                    `${playerOne.name} won ${playerOne.totalScore} ${playerOne.totalScore === 1 ? "game" : "games"
+                    }`
+                );
+                const newGame = readlineSync.question(
+                    `Do you want to play another game?`
+                );
+                if (newGame.toLowerCase() === `y` || newGame.toLowerCase() === `yes`) {
+                    game(players);
+                }
+                console.log(
+                    `Total score is ${playerOne.name} ${playerOne.totalScore} : ${playerTwo.totalScore} ${playerTwo.name}`
+                );
                 break;
             }
-            if (playerScore < computerScore) {
-                console.log(`Sorry, you lose Computer score is: ${computerScore} Your score is: ${playerScore}`)
+            if (playerOne.score < playerTwo.score) {
+                console.log(
+                    `Contrags! You win, ${playerTwo.name} score is: ${playerTwo.score} ${playerOne.name} score is: ${playerOne.score}`
+                );
+                playerTwo.totalScore++;
+                playerOne.score = 0;
+                playerTwo.score = 0;
+                console.log(
+                    `${playerTwo.name} won ${playerTwo.totalScore} ${playerTwo.totalScore === 1 ? "game" : "games"
+                    }`
+                );
+                const newGame = readlineSync.question(
+                    `Do you want to play another game?`
+                );
+                if (newGame.toLowerCase() === `y` || newGame.toLowerCase() === `yes`) {
+                    game(players);
+                }
+                console.log(
+                    `Total score is ${playerOne.name} ${playerOne.totalScore} : ${playerTwo.totalScore} ${playerTwo.name}`
+                );
                 break;
             }
         }
-
     }
 }
-game();
+setup();
