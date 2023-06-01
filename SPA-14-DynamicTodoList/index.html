@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="tasker" class="tasker">
+      <div id="error" class="error">Please enter a task</div>
+      <div id="tasker-header" class="tasker-header">
+        <input type="text" id="input-task" placeholder="Enter a task" />
+        <button id="add-task-btn"><i class="fa fa-fw fa-plus"></i></button>
+      </div>
+      <div class="tasker-body">
+        <ul id="tasks">
+          <!-- <li class="task">
+            <input type="checkbox" name="task-finished" id="task1-finished" />
+            Item 1
+            <button>Delete</button>
+          </li>
+          <li class="task">
+            <input
+              type="checkbox"
+              name="task-finished"
+              id="task1-finished"
+            />Item 2<button>Delete</button>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
